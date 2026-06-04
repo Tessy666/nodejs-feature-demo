@@ -22,7 +22,7 @@ jobs:
         run: echo "$APP_VERSION"
 
       - name: Install Dependencies
-        run: npm install
+        run:  npm ci --ignore-scripts
 
       - name: Sonar Scan
         uses: SonarSource/sonarqube-scan-action@v6
