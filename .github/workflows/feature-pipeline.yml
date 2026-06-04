@@ -1,0 +1,25 @@
+name: Feature Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Read package.json version
+        run: |
+          APP_VERSION=$(jq -r .version package.json)
+          echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
+
+      - name: Check Version
+        run: echo "$APP_VERSION"
+
+      - name: Install Dependencies
+        run: npm install
