@@ -30,6 +30,16 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
 
+      - name: Sonar Quality Gate check
+        id: sonar_check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        with:
+          pollingTimeoutSec: 600
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+
+
       - name: Slack Alert
         if: always()
         uses: slackapi/slack-github-action@v3.0.3
@@ -38,4 +48,6 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             text: "✅ NodeJS Feature Pipeline Success"
+
+              
 
