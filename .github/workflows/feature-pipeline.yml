@@ -24,6 +24,12 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Sonar Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+
       - name: Slack Alert
         if: always()
         uses: slackapi/slack-github-action@v3.0.3
@@ -32,3 +38,4 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             text: "✅ NodeJS Feature Pipeline Success"
+
