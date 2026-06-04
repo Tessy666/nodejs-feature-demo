@@ -24,6 +24,12 @@ jobs:
       - name: Install Dependencies
         run:  npm ci --ignore-scripts
 
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
       - name: Sonar Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
