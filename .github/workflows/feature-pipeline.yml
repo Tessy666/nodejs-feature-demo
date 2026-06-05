@@ -26,6 +26,11 @@ jobs:
       - name: Check Version
         run: echo "$APP_VERSION"
 
+      - name: Check Node Version
+        run: |
+          node -v
+          npm -v
+
       - name: Install Dependencies
         run:  npm ci --ignore-scripts
 
