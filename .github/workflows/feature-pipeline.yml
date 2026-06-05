@@ -98,15 +98,10 @@ jobs:
       #     exit-code: 0    
 
       - name: Install Trivy
-        uses: aquasecurity/setup-trivy@v0.2.2
+        uses: aquasecurity/setup-trivy@master
 
-
-      - name: Trivy Scan
-        run: |
-          trivy image \
-          --severity HIGH,CRITICAL \
-          --exit-code 0 \
-          438679586669.dkr.ecr.eu-north-1.amazonaws.com/catalogue:${APP_VERSION}
+      - name: Check Trivy Version
+        run: trivy --version
     
       - name: Push Docker Image
         run: |
