@@ -98,17 +98,15 @@ jobs:
       #     exit-code: 0    
 
       - name: Install Trivy
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget
-          wget https://github.com/aquasecurity/trivy/releases/download/v0.65.0/trivy_0.65.0_Linux-64bit.deb
-          sudo dpkg -i trivy_0.65.0_Linux-64bit.deb
+        uses: aquasecurity/setup-trivy@v0.2.2
+
 
       - name: Trivy Scan
         run: |
-          trivy image --severity HIGH,CRITICAL \
-          438679586669.dkr.ecr.eu-north-1.amazonaws.com/catalogue:${APP_VERSION}  
-
+          trivy image \
+          --severity HIGH,CRITICAL \
+          --exit-code 0 \
+          438679586669.dkr.ecr.eu-north-1.amazonaws.com/catalogue:${APP_VERSION}
     
       - name: Push Docker Image
         run: |
