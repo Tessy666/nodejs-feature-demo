@@ -83,7 +83,17 @@ jobs:
         run: |
           docker build -t catalogue:${{ env.APP_VERSION }} .
 
-          
+      - name: Tag Docker Image
+        run: |
+          docker tag catalogue:${APP_VERSION} \
+          438679586669.dkr.ecr.eu-north-1.amazonaws.com/catalogue:${APP_VERSION}
+
+      - name: Push Docker Image
+        run: |
+          docker push \
+          438679586669.dkr.ecr.eu-north-1.amazonaws.com/catalogue:${APP_VERSION}    
+
+
       
       - name: Slack Alert
         if: always()
