@@ -83,6 +83,17 @@ jobs:
         run: |
           docker build -t catalogue:${{ env.APP_VERSION }} .
 
+      - name: Trivy Scan
+        id: trivy_scan
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: catalogue:${{ env.APP_VERSION }}
+          scan-type: image
+          vuln-type: os,library
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: 0    
+
       - name: Tag Docker Image
         run: |
           docker tag catalogue:${APP_VERSION} \
