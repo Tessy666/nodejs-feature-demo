@@ -7,6 +7,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      security-events: read
+
 
     steps:
 
@@ -52,8 +57,7 @@ jobs:
           github-token: ${{ secrets.DEPENDABOT_TOKEN }}
           severities: 'critical,high'
           output-file: 'security-report.csv'
-          fail-on-alerts: 'true'    
-
+          fail-on-alerts: 'true'
 
       - name: Slack Alert
         if: always()
