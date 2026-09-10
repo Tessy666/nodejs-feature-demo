@@ -1,7 +1,10 @@
 FROM node:20.20.2-alpine3.23 AS builder
 WORKDIR /app
+# working directoty
 COPY package.json .
+#Copying application to current folder
 COPY *.js .
+#Heart of your application
 RUN npm install
 
 
